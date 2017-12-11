@@ -4,7 +4,8 @@
 //   //can make array a bunch of strings. have a correct answer property and then an incorrect answers array. or you could have an answers array and another that has the index of which is the correct answer. what do you need to put in DOM (radio values) to reference back to your data? could make answers string the unique value. using index value of the array may be safer.
 // }
 
-
+//QUESTION 1 (line 8): Do we need to populate these with values? If so, what?
+//QUESTION 2 (line 91 and line 101): How do we properly incorporate our HTML with our rendering functions?
 const STORE = {
   currentQuestion: ,
   currentView: ,
@@ -50,7 +51,43 @@ const QUESTIONS = [
 //top level renders everything on page. The master function decides which of the sub functions to call. It looks at which of your views to render...maybe question page, maybe final results page, etc...
 
 //the template is basically the JS rendering. Job of rendering is covered by the renderer and the generator. You can do them as one function or as 2, as you please.
-
+function renderPage() {
+  if (STORE.view === 'intro'){
+    $('.intro').show();
+    $('.quiz').hide();
+    $('.results').hide();
+    $('.answer-incorrect').hide();
+    $('.answer-correct').hide();
+  }
+  else if (STORE.view === 'quiz'){
+    $('.quiz').show();
+    $('.intro').hide();
+    $('.results').hide();
+    $('.answer-incorrect').hide();
+    $('.answer-correct').hide();
+  }
+  else if (STORE.view === 'results'){
+    $('.results').show();
+    $('.intro').hide();
+    $('.quiz').hide();
+    $('.answer-incorrect').hide();
+    $('.answer-correct').hide();
+  }
+  else if (STORE.view === 'answer-incorrect'){
+      $('.quiz').show();
+      $('.answer-incorrect').show();
+      $('.intro').hide();
+      $('.results').hide();
+      $('.answer-correct').hide();
+  }
+  else if (STORE.view === 'answer-correct'){
+    $('.quiz').show();
+    $('.answer-correct').show();
+    $('.intro').hide();
+    $('.results').hide();
+    $('.answer-incorrect').hide();  
+  }
+}
 function renderQuestionText() {
   console.log('`renderQuestion` ran');
 //what to put into renderQuestion to render 1 entire question. Display question here somehow. We do this from HTML.
