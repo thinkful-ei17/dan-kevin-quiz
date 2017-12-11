@@ -6,10 +6,11 @@
 
 
 const STORE = {
-    currentQuestion: ,
-    currentView: ,
-    currentScore: ,
-    currentCorrect:
+  view: ,
+  currentQuestion: ,
+  currentView: ,
+  currentScore: ,
+  currentCorrect:
 }
 
 // what's stored as a part of the question?
@@ -48,7 +49,8 @@ const QUESTIONS = [
 /********************   DOM MANIPULATION FUNCTIONS   *******************/
 
 function renderQuestionList() {
-
+  console.log('`renderShoppingList` ran');
+  
 }
 
 
@@ -60,7 +62,19 @@ function renderQuestionList() {
 function handleClickStart() {
   $('.js-click-start').on('submit', event => {
     event.preventDefault();
+    STORE.view = question;
+
     console.log('`handleClickStart` ran');
     
   });
 }
+
+function handleQuestionSubmit()  {}
+
+
+
+// 1. User clicks Start Quiz button. Is taken to the first quiz question
+// 2. The view attribute in the STORE is changed from "intro" to "question"
+// 3. User selects from one of four options and clicks submit button
+// 4. User is prompted saying wether they are correct or incorrect. Another button appears to go to next question
+// 5.
