@@ -7,10 +7,10 @@
 //QUESTION 1 (line 8): Do we need to populate these with values? If so, what?
 //QUESTION 2 (line 91 and line 101): How do we properly incorporate our HTML with our rendering functions?
 const STORE = {
-  currentQuestion: ,
-  currentView: ,
-  currentScore: ,
-  currentCorrect:
+  currentQuestion: 0,
+  currentView: 'intro',
+  currentScore: 0,
+  currentCorrect: 0
 }
 
 // what's stored as a part of the question?
@@ -52,7 +52,7 @@ const QUESTIONS = [
 
 //the template is basically the JS rendering. Job of rendering is covered by the renderer and the generator. You can do them as one function or as 2, as you please.
 function renderPage() {
-  if (STORE.view === 'intro'){
+  if (STORE.currentView === 'intro'){
     $('.intro').show();
     $('.quiz').hide();
     $('.results').hide();
