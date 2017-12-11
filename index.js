@@ -1,4 +1,26 @@
-{
-  question: "what's my name?"
-  //can make array a bunch of strings. have a correct answer property and then an incorrect answers array. or you could have an answers array and another that has the index of which is the correct answer. what do you need to put in DOM (radio values) to reference back to your data? could make answers string the unique value. using index value of the array may be safer. 
+'use strict';
+// {
+//   question: "what's my name?"
+//   //can make array a bunch of strings. have a correct answer property and then an incorrect answers array. or you could have an answers array and another that has the index of which is the correct answer. what do you need to put in DOM (radio values) to reference back to your data? could make answers string the unique value. using index value of the array may be safer. 
+// }
+
+
+const STORE = {
+    currentQuestion: ,
+    currentView: ,
+    currentScore: ,
+    currentCorrect: ,
+
 }
+
+// const QUESTIONS = {
+//   q1: [
+//       { text: 'What is the capital of France?',
+//       options: 'Lyon', 'Paris', 'Marseille', 'Toulouse',
+//       correctAns: 'Paris',
+
+//     },
+    q2: []
+
+//   ]
+// };
