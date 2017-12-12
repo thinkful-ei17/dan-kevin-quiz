@@ -213,7 +213,7 @@ function handleQuestionSubmit() {
 function handleNextQuestion() {
   $('.answer-correct').on('submit', '.js-click-next', event => {
     event.preventDefault();
-    STORE.currentQuestion += 
+    STORE.currentQuestion = ++STORE.currentQuestion;
     STORE.currentView = 'quiz';
     console.log(STORE.currentQuestion);
     console.log('`handleNextQuestion` ran');
