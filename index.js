@@ -55,8 +55,33 @@ const QUESTIONS = [
 //top level renders everything on page. The master function decides which of the sub functions to call. It looks at which of your views to render...maybe question page, maybe final results page, etc...
 
 //the template is basically the JS rendering. Job of rendering is covered by the renderer and the generator. You can do them as one function or as 2, as you please.
-//switch - when evaluatin a string you can do it with less code. It looks better visually.
+//switch - when evaluating a string you can do it with less code. It looks better visually.
 //watch for variable scope in switch statement. You declare them outside and use them in each case if you want. The if blocks are scoped to each block. Now render function is only showing/hiding components. It needs to also populate the component we’re showing with some HTML.
+
+/*
+switch (expr) {
+  case 'Oranges':
+    console.log('Oranges are $0.59 a pound.');
+    break;
+  case 'Apples':
+    console.log('Apples are $0.32 a pound.');
+    break;
+  case 'Bananas':
+    console.log('Bananas are $0.48 a pound.');
+    break;
+  case 'Cherries':
+    console.log('Cherries are $3.00 a pound.');
+    break;
+  case 'Mangoes':
+  case 'Papayas':
+    console.log('Mangoes and papayas are $2.79 a pound.');
+    break;
+  default:
+    console.log('Sorry, we are out of ' + expr + '.');
+}
+
+console.log("Is there anything else you'd like?");
+*/
 function renderPage() {
   if (STORE.currentView === 'intro'){
     $('.intro').show();
@@ -71,6 +96,7 @@ function renderPage() {
     $('.results').hide();
     $('.answer-incorrect').hide();
     $('.answer-correct').hide();
+    renderQuestionText();
   }
   else if (STORE.currentView === 'results'){
     $('.results').show();
@@ -143,27 +169,30 @@ function renderAnswerList(question) {
 }
 
 /********************    EVENT-HANDLING FUNCTIONS    ********************/
-
+//if only place start button appears is the intro container, then need to put event listener there. When DOM first loads, want to place handleClickStart onto it.
 function handleClickStart() {
-  $('.js-click-start').on('submit', event => {
+  $('.intro').on('click', '.js-click-start', event => {
     event.preventDefault();
-    renderIntro();
-
-
-
 
     //how do we render the first question page when we hit the start button? There's 2 separate parts to this. part 1 is how render function decides how to render first page? part 2 is how does start button do that to the STORE? How does renderer decide to render first question.
 
     //with whatever array you're looking at, the first one is simply the variable zero. It's the index into QUESTIONS, not store. currentQuestion means index into QUESTIONS array. the currentQuestion STORE value represents which question you're on.
     STORE.currentQuestion = 0;
-
+    STORE.currentView = "quiz";
     console.log('`handleClickStart` ran');
-
+    renderPage();
   });
 }
 
-function handleQuestionSubmit()  {}
-renderIntro();
+function handleQuestionSubmit()  {
+
+}
+//do this after page first loads.
+$(function() {
+  renderIntro();
+
+  handleClickStart();
+})
 //renderQuestionText();
 
 
