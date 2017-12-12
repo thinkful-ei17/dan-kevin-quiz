@@ -143,10 +143,14 @@ function renderQuestionText() {
   <form id="js-quiz-app-form">
   <h2>"${STORE.currentQuestion} of 5"</h2>
   <div class="js-answers">
-    <input type="radio" name="answer" value="${QUESTIONS.options}"></input><br>
-    <input type="radio" name="answer" value="${QUESTIONS.options}"></input><br>
-    <input type="radio" name="answer" value="${QUESTIONS.options}"></input><br>
-    <input type="radio" name="answer" value="${QUESTIONS.options}"></input>
+    <input type="radio" id="choice1" name="answer" value=""></input>
+    <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[0]}</label><br>
+    <input type="radio" id="choice2" name="answer" value=""></input>
+    <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[1]}</label><br>
+    <input type="radio" id="choice3" name="answer" value=""></input>
+    <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[2]}</label><br>
+    <input type="radio" id="choice4" name="answer" value=""></input>
+    <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[3]}</label>
   </div>
   <input type="submit" name="Submit" value="Submit"></input>
  </form>
@@ -159,10 +163,14 @@ function renderAnswerCorrect() {
   <form id="js-quiz-app-form">
   <h2>"${STORE.currentQuestion} of 5"</h2>
   <div class="js-answers">
-    <input type="radio" name="answer" value="${QUESTIONS.options}"></input><br>
-    <input type="radio" name="answer" value="${QUESTIONS.options}"></input><br>
-    <input type="radio" name="answer" value="${QUESTIONS.options}"></input><br>
-    <input type="radio" name="answer" value="${QUESTIONS.options}"></input>
+  <input type="radio" id="choice1" name="answer" value=""></input>
+  <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[0]}</label><br>
+  <input type="radio" id="choice2" name="answer" value=""></input>
+  <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[1]}</label><br>
+  <input type="radio" id="choice3" name="answer" value=""></input>
+  <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[2]}</label><br>
+  <input type="radio" id="choice4" name="answer" value=""></input>
+  <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[3]}</label>
   </div>
   <input type="submit" name="Submit" value="Submit"></input>
  </form>
@@ -196,7 +204,7 @@ function renderAnswerList(question) {
 function handleClickStart() {
   $('.intro').on('click', '.js-click-start', event => {
     event.preventDefault();
-    STORE.currentQuestion = 0;
+    STORE.currentQuestion = 1;
     STORE.currentView = 'quiz';
     console.log('`handleClickStart` ran');
     renderPage();
