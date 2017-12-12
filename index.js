@@ -118,6 +118,7 @@ function renderPage() {
     $('.intro').hide();
     $('.results').hide();
     $('.answer-incorrect').hide();
+    renderAnswerCorrect();
   }
 }
 //what to put into renderQuestion to render 1 entire question. Display question here somehow. We do this from HTML.
@@ -160,26 +161,29 @@ function renderQuestionText() {
 function renderAnswerCorrect() {
   console.log('`renderAnswerCorrect` ran');
   $('.answer-correct').html(`
-  <form id="js-quiz-app-form">
-  <h2>"${STORE.currentQuestion} of 5"</h2>
-  <div class="js-answers">
-  <input type="radio" id="choice1" name="answer" value=""></input>
-  <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[0]}</label><br>
-  <input type="radio" id="choice2" name="answer" value=""></input>
-  <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[1]}</label><br>
-  <input type="radio" id="choice3" name="answer" value=""></input>
-  <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[2]}</label><br>
-  <input type="radio" id="choice4" name="answer" value=""></input>
-  <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[3]}</label>
-  </div>
-  <input type="submit" name="Submit" value="Submit"></input>
- </form>
-
  <h3>That's correct!</h3>
  <button type="submit" class="">Next question</button>
  <p class="num-correct">1/5 correct</p>
  `);
 }
+
+
+/*
+<form id="js-quiz-app-form">
+<h2>"${STORE.currentQuestion} of 5"</h2>
+<div class="js-answers">
+<input type="radio" id="choice1" name="answer" value=""></input>
+<label for="choice1">${QUESTIONS[STORE.currentQuestion].options[0]}</label><br>
+<input type="radio" id="choice2" name="answer" value=""></input>
+<label for="choice1">${QUESTIONS[STORE.currentQuestion].options[1]}</label><br>
+<input type="radio" id="choice3" name="answer" value=""></input>
+<label for="choice1">${QUESTIONS[STORE.currentQuestion].options[2]}</label><br>
+<input type="radio" id="choice4" name="answer" value=""></input>
+<label for="choice1">${QUESTIONS[STORE.currentQuestion].options[3]}</label>
+</div>
+<input type="submit" name="Submit" value="Submit"></input>
+</form>
+*/
 
 
 // function renderQuestionCorrect() {
@@ -222,7 +226,7 @@ function handleQuestionSubmit() {
     console.log(userAnswer);
     STORE.currentView = 'answer-correct';
     console.log('`handleQuestionSubmit` ran');
-    renderPage()
+    renderPage();
   });
 }
 
@@ -231,6 +235,7 @@ $(function() {
   renderIntro();
   handleClickStart();
   handleQuestionSubmit();
+
 });
 //renderQuestionText();
 
