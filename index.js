@@ -204,12 +204,14 @@ function handleClickStart() {
 }
 //how do we render the first question page when we hit the start button? There's 2 separate parts to this. part 1 is how render function decides how to render first page? part 2 is how does start button do that to the STORE? How does renderer decide to render first question.
 
-//with whatever array you're looking at, the first one is simply the variable zero. It's the index into QUESTIONS, not store. currentQuestion means index into QUESTIONS array. the currentQuestion STORE value represents which question you're on.
+//with whatever array you're looking at, the first one is simply the variable zero. It's the index into QUESTIONS, not . currentQuestion means index into QUESTIONS array. the currentQuestion STORE value represents which question you're on.
 
 //this looks for user selection via event listener
 function handleQuestionSubmit() {
-  $('.quiz').on('click', '.js-answers', event => {
+  $('.quiz').on('submit', '#js-quiz-app-form', event => {
     event.preventDefault();
+    const userAnswer = $('input[name=answer]:checked').val();
+    console.log(userAnswer);
     STORE.currentView = 'answer-correct';
     console.log('`handleQuestionSubmit` ran');
     renderPage()
