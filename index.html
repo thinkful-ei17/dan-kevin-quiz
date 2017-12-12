@@ -10,35 +10,31 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <div class="intro">
-    <h1>Quiz App - Introduction Page</h1>
+ <div class="intro">
+    <!-- <h1>Quiz App - Introduction Page</h1>
     <p>Click on the button to begin.</p>
     <p>Answers are required for all questions.</p>
-    <button name="start" class="js-click-start">Start</input>
+    <button name="start" class="js-click-start">Start</input> -->
   </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="index.js"></script>
-
-</html>
 
 
 <!-- Question text -->
-
+<!--
   <div class="quiz">
     <form id="js-quiz-app-form">
       <h2>`${QUESTION}`</h2>
       <div class="js-answers">
-        <!--tie value to data...-->
-        <input type="radio" name="" value=QUESTIONS>`${QUESTIONS}`</input><br>
-        <input type="radio" name="" value="{QUESTIONS}"></input><br>
-        <input type="radio" name="" value="{QUESTIONS}"></input><br>
-        <input type="radio" name="" value="{QUESTIONS}"></input>
+        
+        <input type="radio" name="" value="{QUESTIONS.options[0]}"></input><br>
+        <input type="radio" name="" value="{QUESTIONS.options[1]}"></input><br>
+        <input type="radio" name="" value="{QUESTIONS.options[2]}"></input><br>
+        <input type="radio" name="" value="{QUESTIONS.options[3]}"></input>
       </div>
       <input type="submit" name="Submit" value="Submit"></input>
     </form>
   </div>
 
-<!-- If answer is correct -->
+<!-- If answer is correct --><!--
   <div class="answer-correct">
       <h3>That's correct!</h3>
       <button type="submit" class="">Next question</button>
@@ -46,7 +42,7 @@
   </div>
 
 
-<!-- If answer is incorrect -->
+<!-- If answer is incorrect --><!--
   <div class="answer-incorrect">
       <h3>Incorrect. The correct answer is ${QUESTIONS.correctAnswer}</h3>
       <button type="submit" class="">Next question</button>
@@ -54,13 +50,14 @@
   </div>
 
 
-<!-- Results page -->
+<!-- Results page --><!--
   <h1 class="results">Results</h1>
   <p>You got 1/5 of correct</p>
   <button type="submit" name="retake" value="Start over">Retake quiz?</input>
-
+  -->
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="index.js"></script>
+
 </body>
 </html>

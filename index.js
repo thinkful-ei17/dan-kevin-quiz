@@ -1,4 +1,5 @@
 'use strict';
+
 // {
 //   question: "what's my name?"
 //   //can make array a bunch of strings. have a correct answer property and then an incorrect answers array. or you could have an answers array and another that has the index of which is the correct answer. what do you need to put in DOM (radio values) to reference back to your data? could make answers string the unique value. using index value of the array may be safer.
@@ -9,47 +10,45 @@
 const STORE = {
   currentQuestion: null,
   currentView: 'intro',
-  currentScore: 0,
+  currentScore: 0, 
   currentCorrect: 0
-}
+};
 
 // what's stored as a part of the question?
 //text is question asking the person. the number of the question is given by its position in the array. no reason for an array here. answer is an array of strings. if have separate thing for each that's correct, you just need a string and it's easier than having them be objects.
-{text: 'string question'},
-{answers: 'this, that, and the other'},
 
-//how to represent several questions??
+
 const QUESTIONS = [
-{
-  text: 'What do you get when you mix salt and water?',
-  options: ['Lemonade', 'Taco surprise', 'Salt water', 'Glue'],
-  answer: 'Salt Water'
-},
+  {
+    text: 'What do you get when you mix salt and water?',
+    options: ['Lemonade', 'Taco surprise', 'Salt water', 'Glue'],
+    correctAnswerIndex: 2
+  },
 
-{
-  text: 'How are spiders made?',
-  options: ['Spider eggs', 'Mixing ants and caterpillars', 'Stepping on M&Ms', 'Asking nicely'],
-  answer: 'Spider eggs'
-},
+  {
+    text: 'How are spiders made?',
+    options: ['Spider eggs', 'Mixing ants and caterpillars', 'Stepping on M&Ms', 'Asking nicely'],
+    correctAnswerIndex: 0
+  },
 
-{
-  text: 'What is my middle name?',
-  options: ['Alexander', 'Lewis', 'No clue', 'Richard'],
-  answer: 'No clue'
-},
+  {
+    text: 'What is my middle name?',
+    options: ['Alexander', 'Lewis', 'No clue', 'Richard'],
+    correctAnswerIndex: 2
+  },
 
-{
-  text: 'What happens during a solar eclipse?',
-  options: ['Water vapor from the ocean extinguishes the sun', 'The moon blocks our view of the sun', 'There is no such thing as a solar eclipse', 'The moon gets jealous and does something about it'],
-  answer: 'The moon blocks our view of the sun'
-}
+  {
+    text: 'What happens during a solar eclipse?',
+    options: ['Water vapor from the ocean extinguishes the sun', 'The moon blocks our view of the sun', 'There is no such thing as a solar eclipse', 'The moon gets jealous and does something about it'],
+    correctAnswerIndex: 3
+  },
 
-{
-  text: 'Where do fish live?',
-  options: ['The sky', 'In water', 'In volcanoes', 'In a tree',],
-  answer: 'In water'
-}
-]
+  {
+    text: 'Where do fish live?',
+    options: ['The sky', 'In water', 'In volcanoes', 'In a tree',],
+    correctAnswerIndex: 1
+  }
+];
 
 /********************   DOM MANIPULATION FUNCTIONS   *******************/
 
@@ -64,28 +63,28 @@ function renderPage() {
     $('.answer-incorrect').hide();
     $('.answer-correct').hide();
   }
-  else if (STORE.view === 'quiz'){
+  else if (STORE.currentView === 'quiz'){
     $('.quiz').show();
     $('.intro').hide();
     $('.results').hide();
     $('.answer-incorrect').hide();
     $('.answer-correct').hide();
   }
-  else if (STORE.view === 'results'){
+  else if (STORE.currentView === 'results'){
     $('.results').show();
     $('.intro').hide();
     $('.quiz').hide();
     $('.answer-incorrect').hide();
     $('.answer-correct').hide();
   }
-  else if (STORE.view === 'answer-incorrect'){
+  else if (STORE.currentView === 'answer-incorrect'){
     $('.quiz').show();
     $('.answer-incorrect').show();
-      $('.intro').hide();
-      $('.results').hide();
-      $('.answer-correct').hide();
+    $('.intro').hide();
+    $('.results').hide();
+    $('.answer-correct').hide();
   }
-  else if (STORE.view === 'answer-correct'){
+  else if (STORE.currentView === 'answer-correct'){
     $('.quiz').show();
     $('.answer-correct').show();
     $('.intro').hide();
@@ -93,10 +92,24 @@ function renderPage() {
     $('.answer-incorrect').hide();  
   }
 }
+ //what to put into renderQuestion to render 1 entire question. Display question here somehow. We do this from HTML.
+  //insert that HTML into the DOM
+
+  //renders the intro page by introducing HTML.
+function renderIntro() {
+  console.log('`renderIntro` ran');
+  $('.intro').html(` 
+  <div class="intro">
+    <h1>Quiz App - Introduction Page</h1>
+        <p>Click on the button to begin.</p>
+        <p>Answers are required for all questions.</p>
+        <button name="start" class="js-click-start">Start</input>
+  </div>`);  
+}
+  
 function renderQuestionText() {
   console.log('`renderQuestion` ran');
-//what to put into renderQuestion to render 1 entire question. Display question here somehow. We do this from HTML.
-  //insert that HTML into the DOM
+ 
   $('.js-answers').html(questionItemString);
   $('.js-answers').find('input').focus();
 }
@@ -105,6 +118,7 @@ function renderQuestionText() {
 
 function renderAnswerList(question) {
   console.log('Generating the answer list');
+  
 
 }
 
@@ -117,6 +131,9 @@ function renderAnswerList(question) {
 function handleClickStart() {
   $('.js-click-start').on('submit', event => {
     event.preventDefault();
+    renderIntro();
+
+
     //how do we render the first question page when we hit the start button? There's 2 separate parts to this. part 1 is how render function decides how to render first page? part 2 is how does start button do that to the STORE? How does renderer decide to render first question.
 
     //with whatever array you're looking at, the first one is simply the variable zero. It's the index into QUESTIONS, not store. currentQuestion means index into QUESTIONS array. the currentQuestion STORE value represents which question you're on.
@@ -128,7 +145,7 @@ function handleClickStart() {
 }
 
 function handleQuestionSubmit()  {}
-
+renderIntro();
 
 
 // 1. User clicks Start Quiz button. Is taken to the first quiz question
