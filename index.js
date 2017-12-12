@@ -10,7 +10,7 @@
 const STORE = {
   currentQuestion: null,
   currentView: 'intro',
-  currentScore: 0, 
+  currentScore: 0,
   currentCorrect: 0
 };
 
@@ -55,6 +55,8 @@ const QUESTIONS = [
 //top level renders everything on page. The master function decides which of the sub functions to call. It looks at which of your views to render...maybe question page, maybe final results page, etc...
 
 //the template is basically the JS rendering. Job of rendering is covered by the renderer and the generator. You can do them as one function or as 2, as you please.
+//switch - when evaluatin a string you can do it with less code. It looks better visually.
+//watch for variable scope in switch statement. You declare them outside and use them in each case if you want. The if blocks are scoped to each block. Now render function is only showing/hiding components. It needs to also populate the compontent we're showing with some HTML.
 function renderPage() {
   if (STORE.currentView === 'intro'){
     $('.intro').show();
@@ -89,24 +91,26 @@ function renderPage() {
     $('.answer-correct').show();
     $('.intro').hide();
     $('.results').hide();
-    $('.answer-incorrect').hide();  
+    $('.answer-incorrect').hide();
   }
 }
 //what to put into renderQuestion to render 1 entire question. Display question here somehow. We do this from HTML.
 //insert that HTML into the DOM
 
-//renders the intro page by introducing HTML
+//renders the intro page by introducing HTML. These functions can be called from TOP level render. You can do show/hides and call renderIntro. Don't do it in event listener. Do it in render function. Render function ultimately knows...if view is intro then generate the intro HTML and show it on the page. There's showing a compontent and populating a component with stuff. If showing intro then only funciton need to run is renderIntro.
+
+//...Like idea of function that generates a HTML string and then from render function you do html=generateIntroHTML and then put it into the DOM. In render function where you say show compotent, you say create HTML and show this component...The generateFunctions typically just return a string of HTML so you can capture that string into a variable and put it into the DOM from anywhere else in your code. Function: generateIntroHTML then returns div class. Then in render function, if storeView = intro...then $(.intro).html(html)...**we are reading from STORE and making rendering decisions from it.** That's the main idea.We do **NOT** want to read from STORE and then traverse DOM and change from DOM. We want to make template and insert template into the DOM. Where you can separate things, this is good.
 function renderIntro() {
   console.log('`renderIntro` ran');
-  $('.intro').html(` 
+  $('.intro').html(`
   <div class="intro">
     <h1>Quiz App - Introduction Page</h1>
         <p>Click on the button to begin.</p>
         <p>Answers are required for all questions.</p>
-        <button name="start" class="js-click-start">Start</input>
-  </div>`);  
+        <button name="start" class="js-click-start">Start</button>
+  </div>`);
 }
-  
+
 function renderQuestionText() {
   console.log('`renderQuestion` ran');
   $('.quiz').html(`
