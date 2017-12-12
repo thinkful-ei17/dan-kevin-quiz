@@ -162,29 +162,10 @@ function renderAnswerCorrect() {
   console.log('`renderAnswerCorrect` ran');
   $('.answer-correct').html(`
  <h3>That's correct!</h3>
- <button type="submit" class="">Next question</button>
+ <button type="submit" class="js-click-next">Next question</button>
  <p class="num-correct">1/5 correct</p>
  `);
 }
-
-
-/*
-<form id="js-quiz-app-form">
-<h2>"${STORE.currentQuestion} of 5"</h2>
-<div class="js-answers">
-<input type="radio" id="choice1" name="answer" value=""></input>
-<label for="choice1">${QUESTIONS[STORE.currentQuestion].options[0]}</label><br>
-<input type="radio" id="choice2" name="answer" value=""></input>
-<label for="choice1">${QUESTIONS[STORE.currentQuestion].options[1]}</label><br>
-<input type="radio" id="choice3" name="answer" value=""></input>
-<label for="choice1">${QUESTIONS[STORE.currentQuestion].options[2]}</label><br>
-<input type="radio" id="choice4" name="answer" value=""></input>
-<label for="choice1">${QUESTIONS[STORE.currentQuestion].options[3]}</label>
-</div>
-<input type="submit" name="Submit" value="Submit"></input>
-</form>
-*/
-
 
 // function renderQuestionCorrect() {
 //   console.log('`renderQuestionCorrect` ran');
@@ -208,15 +189,12 @@ function renderAnswerList(question) {
 function handleClickStart() {
   $('.intro').on('click', '.js-click-start', event => {
     event.preventDefault();
-    STORE.currentQuestion = 1;
+    STORE.currentQuestion = 0;
     STORE.currentView = 'quiz';
     console.log('`handleClickStart` ran');
     renderPage();
   });
 }
-//how do we render the first question page when we hit the start button? There's 2 separate parts to this. part 1 is how render function decides how to render first page? part 2 is how does start button do that to the STORE? How does renderer decide to render first question.
-
-//with whatever array you're looking at, the first one is simply the variable zero. It's the index into QUESTIONS, not . currentQuestion means index into QUESTIONS array. the currentQuestion STORE value represents which question you're on.
 
 //this looks for user selection via event listener
 function handleQuestionSubmit() {
@@ -229,12 +207,27 @@ function handleQuestionSubmit() {
     renderPage();
   });
 }
+//user clicks "next" button after getting feedback, triggers next question
+//Current issue 1: Can't get function to run. Something wrong with event listener?
+//Current issue 2: Need to figure out how to increment the STORE.currentQuestion.
+function handleNextQuestion() {
+  $('.answer-correct').on('submit', '.js-click-next', event => {
+    event.preventDefault();
+    STORE.currentQuestion += 
+    STORE.currentView = 'quiz';
+    console.log(STORE.currentQuestion);
+    console.log('`handleNextQuestion` ran');
+    renderPage();    
+
+  });
+}
 
 //do this after page first loads.
 $(function() {
   renderIntro();
   handleClickStart();
   handleQuestionSubmit();
+  handleNextQuestion();
 
 });
 //renderQuestionText();
