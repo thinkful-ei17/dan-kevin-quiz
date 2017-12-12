@@ -7,7 +7,7 @@
 //QUESTION 1 (line 8): Do we need to populate these with values? If so, what?
 //QUESTION 2 (line 91 and line 101): How do we properly incorporate our HTML with our rendering functions?
 const STORE = {
-  currentQuestion: 0,
+  currentQuestion: null,
   currentView: 'intro',
   currentScore: 0,
   currentCorrect: 0
@@ -21,28 +21,33 @@ const STORE = {
 //how to represent several questions??
 const QUESTIONS = [
 {
-  text: 'Question 1 itself',
-  options: ['option 1', 'option 2', 'option 3'],
-  answer: 'option 1'
+  text: 'What do you get when you mix salt and water?',
+  options: ['Lemonade', 'Taco surprise', 'Salt water', 'Glue'],
+  answer: 'Salt Water'
 },
 
 {
-  text: 'Question 2 itself',
-  options: ['option 1', 'option 2', 'option 3'],
-  answer: 'option 3'
+  text: 'How are spiders made?',
+  options: ['Spider eggs', 'Mixing ants and caterpillars', 'Stepping on M&Ms', 'Asking nicely'],
+  answer: 'Spider eggs'
 },
 
 {
-  text: 'Question 3 itself',
-  options: ['option 1', 'option 2', 'option 3'],
-  answer: 'option 2'
+  text: 'What is my middle name?',
+  options: ['Alexander', 'Lewis', 'No clue', 'Richard'],
+  answer: 'No clue'
 },
 
-// How to Represent A SINGLE Question:
 {
-  text: 'Question 4 itself',
-  options: ['option 1', 'option 2', 'option 3'],
-  answer: 'option 3'
+  text: 'What happens during a solar eclipse?',
+  options: ['Water vapor from the ocean extinguishes the sun', 'The moon blocks our view of the sun', 'There is no such thing as a solar eclipse', 'The moon gets jealous and does something about it'],
+  answer: 'The moon blocks our view of the sun'
+}
+
+{
+  text: 'Where do fish live?',
+  options: ['The sky', 'In water', 'In volcanoes', 'In a tree',],
+  answer: 'In water'
 }
 ]
 
@@ -74,8 +79,8 @@ function renderPage() {
     $('.answer-correct').hide();
   }
   else if (STORE.view === 'answer-incorrect'){
-      $('.quiz').show();
-      $('.answer-incorrect').show();
+    $('.quiz').show();
+    $('.answer-incorrect').show();
       $('.intro').hide();
       $('.results').hide();
       $('.answer-correct').hide();
