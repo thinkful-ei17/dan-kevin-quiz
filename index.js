@@ -221,8 +221,8 @@ function handleQuestionSubmit() {
 //do this after page first loads.
 $(function() {
   renderIntro();
-
   handleClickStart();
+  handleQuestionSubmit();
 });
 //renderQuestionText();
 
