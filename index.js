@@ -92,10 +92,10 @@ function renderPage() {
     $('.answer-incorrect').hide();  
   }
 }
- //what to put into renderQuestion to render 1 entire question. Display question here somehow. We do this from HTML.
-  //insert that HTML into the DOM
+//what to put into renderQuestion to render 1 entire question. Display question here somehow. We do this from HTML.
+//insert that HTML into the DOM
 
-  //renders the intro page by introducing HTML.
+//renders the intro page by introducing HTML
 function renderIntro() {
   console.log('`renderIntro` ran');
   $('.intro').html(` 
@@ -109,22 +109,34 @@ function renderIntro() {
   
 function renderQuestionText() {
   console.log('`renderQuestion` ran');
- 
-  $('.js-answers').html(questionItemString);
-  $('.js-answers').find('input').focus();
+  $('.quiz').html(`
+  <form id="js-quiz-app-form">
+  <h2>"${STORE.currentQuestion} of 5"</h2>
+  <div class="js-answers">
+    <input type="radio" name="answer" value="${QUESTIONS.options}"></input><br>
+    <input type="radio" name="answer" value="${QUESTIONS.options}"></input><br>
+    <input type="radio" name="answer" value="${QUESTIONS.options}"></input><br>
+    <input type="radio" name="answer" value="${QUESTIONS.options}"></input>
+  </div>
+  <input type="submit" name="Submit" value="Submit"></input>
+ </form>
+ `);
 }
 
+// function renderQuestionCorrect() {
+//   console.log('`renderQuestionCorrect` ran');
+
+// function renderQuestionIncorrect() {
+//     console.log('`renderQuestionIncorrect` ran');
+
+// $('.js-answers').find('input').focus();
+
+// $('.js-answers').html(questionItemString);
 //second level render is to render the individual sections.
 
 function renderAnswerList(question) {
   console.log('Generating the answer list');
-  
-
 }
-
-
-
-
 
 /********************    EVENT-HANDLING FUNCTIONS    ********************/
 
@@ -132,6 +144,8 @@ function handleClickStart() {
   $('.js-click-start').on('submit', event => {
     event.preventDefault();
     renderIntro();
+
+
 
 
     //how do we render the first question page when we hit the start button? There's 2 separate parts to this. part 1 is how render function decides how to render first page? part 2 is how does start button do that to the STORE? How does renderer decide to render first question.
@@ -145,11 +159,12 @@ function handleClickStart() {
 }
 
 function handleQuestionSubmit()  {}
-renderIntro();
+// renderIntro();
+renderQuestionText();
 
 
-// 1. User clicks Start Quiz button. Is taken to the first quiz question
+// 1. User clicks S tart Quiz button. Is taken to the first quiz question
 // 2. The view attribute in the STORE is changed from "intro" to "question"
 // 3. User selects from one of four options and clicks submit button
 // 4. User is prompted saying wether they are correct or incorrect. Another button appears to go to next question
-// 5.
+// 5
