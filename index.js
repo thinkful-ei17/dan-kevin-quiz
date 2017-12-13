@@ -82,6 +82,7 @@ switch (expr) {
 
 console.log("Is there anything else you'd like?");
 */
+
 function renderPage() {
   if (STORE.currentView === 'intro'){
     $('.intro').show();
@@ -142,15 +143,16 @@ function renderQuestionText() {
   console.log('`renderQuestion` ran');
   $('.quiz').html(`
   <form id="js-quiz-app-form">
-  <h2>"${STORE.currentQuestion} of 5"</h2>
+  <h2>"${STORE.currentQuestion+1} of 5"</h2>
+  <h2>${QUESTIONS[STORE.currentQuestion].text}</h2>
   <div class="js-answers">
-    <input type="radio" id="choice1" name="answer" value=""></input>
+    <input type="radio" id="choice1" name="answer" value="${QUESTIONS[STORE.currentQuestion].options[0]}"></input>
     <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[0]}</label><br>
-    <input type="radio" id="choice2" name="answer" value=""></input>
+    <input type="radio" id="choice2" name="answer" value="${QUESTIONS[STORE.currentQuestion].options[1]}"></input>
     <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[1]}</label><br>
-    <input type="radio" id="choice3" name="answer" value=""></input>
+    <input type="radio" id="choice3" name="answer" value="${QUESTIONS[STORE.currentQuestion].options[2]}"></input>
     <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[2]}</label><br>
-    <input type="radio" id="choice4" name="answer" value=""></input>
+    <input type="radio" id="choice4" name="answer" value="${QUESTIONS[STORE.currentQuestion].options[3]}"></input>
     <label for="choice1">${QUESTIONS[STORE.currentQuestion].options[3]}</label>
   </div>
   <input type="submit" name="Submit" value="Submit"></input>
@@ -158,13 +160,25 @@ function renderQuestionText() {
  `);
 }
 
-function renderAnswerCorrect() {
+//Work with Alex.
+//where am I going to handle quetion? in renderAnswerCorrect (it could deal w checking if question was correct/incorrect and then display the necessary HTML), while the handleQuestionSubmit checks for the VALUE to make sure that the question is correct or incorrect and then passing an argument to renderAnswerCorrect and if answer passed is true then go on line 168 and say correct on the h3. renderAnswerCorrect needs a global if statement which revolves around its argument...we'll be using argument passed to it from handleQuestionSubmit and if argument True or False we will deal with .html   renderAnswerCorrect will be called from handleQuestionSubmit. We want to call renderAnswerCorrect from handleQuestionSubmit passing a value of whether the answer is correct or not. Important to be a BOOLEAN value. if isCorrect is true then render correct, if false then render incorrect.
+
+function renderAnswerCorrect(isCorrect) {
+  console.log($('input[name=answer]:checked').val());
   console.log('`renderAnswerCorrect` ran');
-  $('.answer-correct').html(`
- <h3>That's correct!</h3>
- <button type="submit" class="js-click-next">Next question</button>
- <p class="num-correct">1/5 correct</p>
- `);
+  if (isCorrect) {
+    $('.answer-correct').html(`
+      <h3>Correct!</h3>
+      <button type="button" class="js-click-next">Next question</button>
+      <p class="num-correct">1/5 correct</p>
+      `);
+  } else {
+    $('.answer-correct').html(`
+      <h3>Incorrect!</h3>
+      <button type="button" class="js-click-next">Next question</button>
+      <p class="num-correct">1/5 correct</p>
+      `);
+  }
 }
 
 // function renderQuestionCorrect() {
@@ -204,20 +218,24 @@ function handleQuestionSubmit() {
     console.log(userAnswer);
     STORE.currentView = 'answer-correct';
     console.log('`handleQuestionSubmit` ran');
+    //you need to pass actual BOOLEAN value. and we will stucture it as: check against user answer that was checked on line 217 that will hold actual value that user clicked with. In the QUESTIONS, we only have the Arrays index (Array[i]) so we will be doing many equality checks...QUESTIONS[STORE.currentQuestion].options[QUESTIONS[STORE.currentQuestion].correctAnswerIndex]  that would go and take from []. We will get to the actual value.
+    renderAnswerCorrect(userAnswer == QUESTIONS[STORE.currentQuestion].options[QUESTIONS[STORE.currentQuestion].correctAnswerIndex]);
+    //above we are checking for the correct answer. and since we know correctAnswerIndex, we are using this number to deal with itself. We can check this.
     renderPage();
+
   });
 }
 //user clicks "next" button after getting feedback, triggers next question
 //Current issue 1: Can't get function to run. Something wrong with event listener?
 //Current issue 2: Need to figure out how to increment the STORE.currentQuestion.
 function handleNextQuestion() {
-  $('.answer-correct').on('submit', '.js-click-next', event => {
+  $('.answer-correct').on('click', '.js-click-next', event => {
     event.preventDefault();
-    STORE.currentQuestion += 
+    STORE.currentQuestion ++;
     STORE.currentView = 'quiz';
     console.log(STORE.currentQuestion);
     console.log('`handleNextQuestion` ran');
-    renderPage();    
+    renderPage();
 
   });
 }
